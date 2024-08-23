@@ -5,6 +5,7 @@ import { deleteUser } from '../redux/actions/userAction';
 
 const UserList = ({ onEdit }) => {
   const users = useSelector((state) => state.users);
+  const sortUser = users.sort((a, b) => b.id - a.id)
   const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState('');
   const [page, setPage] = useState(0);
@@ -18,7 +19,7 @@ const UserList = ({ onEdit }) => {
     setSearchQuery(event.target.value.toLowerCase());
   };
 
-  const filteredUsers = users.filter(
+  const filteredUsers = sortUser.filter(
     (user) =>
       user.name.toLowerCase().includes(searchQuery) ||
       user.email.toLowerCase().includes(searchQuery) ||
