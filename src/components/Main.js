@@ -10,9 +10,13 @@ export default function Main() {
         setUserToEdit(user);
     };
 
+    const resetEditState = () => {
+        setUserToEdit(null);
+    };
+
     return (
         <div>
-            <UserForm userToEdit={userToEdit} />
+            <UserForm userToEdit={userToEdit} onResetEdit={resetEditState}/>
             <UserList onEdit={handleEdit} />
         </div>
     )

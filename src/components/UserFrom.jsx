@@ -1,10 +1,9 @@
-// src/components/UserForm.js
 import React, { useState, useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { addUser, updateUser } from '../redux/actions/userAction';
-import { Button, Container, Grid, TextField } from '@mui/material';
+import { Box, Button, Container, Grid, TextField, Typography } from '@mui/material';
 
-const UserForm = ({ userToEdit }) => {
+const UserForm = ({ userToEdit, onResetEdit }) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phonenumber, setPhonenumber] = useState('');
@@ -29,6 +28,7 @@ const UserForm = ({ userToEdit }) => {
         const user = { id: userToEdit ? userToEdit.id : Date.now(), name, email, phonenumber };
         if (userToEdit) {
             dispatch(updateUser(user));
+            onResetEdit(); // Reset the edit state in the parent component
         } else {
             dispatch(addUser(user));
         }
@@ -36,10 +36,13 @@ const UserForm = ({ userToEdit }) => {
         setName('');
         setEmail('');
         setPhonenumber('');
-    }, [dispatch, name, email, phonenumber, userToEdit]);
+    }, [dispatch, name, email, phonenumber, userToEdit, onResetEdit]);
 
     return (
-        <Container sx={{padding:"20px"}}>
+        <Container sx={{ padding: "20px" }}>
+            <Box mb={2}>
+                <Typography variant="h5">{userToEdit ? 'Update User' : 'Add User'}</Typography>
+            </Box>
             <form onSubmit={handleSubmit}>
                 <Grid container spacing={2} >
                     <Grid item md={12}>
