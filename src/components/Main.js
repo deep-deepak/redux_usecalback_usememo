@@ -12,8 +12,8 @@ export default function Main() {
 
     return (
         <div>
-      <UserForm userToEdit={userToEdit} />
-      <UserList onEdit={handleEdit} />
-    </div>
+            <UserForm userToEdit={userToEdit} />
+            <UserList onEdit={handleEdit} />
+        </div>
     )
 }

@@ -2,6 +2,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { addUser, updateUser } from '../redux/actions/userAction';
+import { Button, Container, Grid, TextField } from '@mui/material';
 
 const UserForm = ({ userToEdit }) => {
     const [name, setName] = useState('');
@@ -38,30 +39,58 @@ const UserForm = ({ userToEdit }) => {
     }, [dispatch, name, email, phonenumber, userToEdit]);
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Name"
-                required
-            />
-            <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email"
-                required
-            />
-            <input
-                type="tel"
-                value={phonenumber}
-                onChange={(e) => setPhonenumber(e.target.value)}
-                placeholder="Phone Number"
-                required
-            />
-            <button type="submit">{userToEdit ? 'Update' : 'Add'} User</button>
-        </form>
+        <Container sx={{padding:"20px"}}>
+            <form onSubmit={handleSubmit}>
+                <Grid container spacing={2} >
+                    <Grid item md={12}>
+                        <TextField
+                            variant="outlined"
+                            fullWidth
+                            label="Name"
+                            type="text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            placeholder="Name"
+                            required
+                        />
+                    </Grid>
+                    <Grid item md={12}>
+                        <TextField
+                            variant="outlined"
+                            fullWidth
+                            label="Email"
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="Email"
+                            required
+                        />
+                    </Grid>
+                    <Grid item md={12}>
+                        <TextField
+                            variant="outlined"
+                            fullWidth
+                            label="Phone Number"
+                            type="tel"
+                            value={phonenumber}
+                            onChange={(e) => setPhonenumber(e.target.value)}
+                            placeholder="Phone Number"
+                            required
+                        />
+                    </Grid>
+                    <Grid item md={12}>
+                        <Button
+                            variant="contained"
+                            type="submit"
+                            fullWidth
+                            color="success"
+                        >
+                            {userToEdit ? 'Update' : 'Add'} User
+                        </Button>
+                    </Grid>
+                </Grid>
+            </form>
+        </Container>
     );
 };
 
