@@ -8,7 +8,6 @@ const UserList = ({ onEdit }) => {
   const dispatch = useDispatch();
 
   const memoizedUsers = useMemo(() => users, [users]);
-  console.log("memoizedUsers",memoizedUsers)
 
   const handleDelete = (id) => {
     dispatch(deleteUser(id));
